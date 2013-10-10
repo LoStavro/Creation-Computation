@@ -1,4 +1,3 @@
-
 int Laura1x = 0;
 int Mel1x = 0;
 
@@ -41,13 +40,6 @@ ellipse (350,60,40,30);
   Laura();
   popMatrix();
 }
-
-
-
-//if (keyPressed && (key==CODED))
-//if (keyCode== RIGHT) {
-//Melx++;
-
 
 
 
