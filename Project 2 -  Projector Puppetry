@@ -129,3 +129,5 @@ void removeTuioCursor(TuioCursor tcur) {
 void refresh(TuioTime bundleTime) { 
   redraw();
 }
+
+// source adapted from original TUIO library code for use with Reactivision and fiducial markers (markerTracking1)
