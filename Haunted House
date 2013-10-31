@@ -1,0 +1,75 @@
+import ddf.minim.spi.*;
+import ddf.minim.signals.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.ugens.*;
+import ddf.minim.effects.*;
+
+import processing.serial.*;
+import ddf.minim.*;
+Minim minim;
+AudioPlayer player;
+AudioSample quiet;
+
+Serial port;
+
+float ardInput1;
+
+PImage  murder;
+PImage  jack;
+
+void setup()
+{
+  
+  size(638, 480);
+  background(125); 
+  //import background image
+  
+  murder = loadImage("shininghallway.jpg");
+  jack = loadImage("jack_scary.png");
+  
+  println(Serial.list());// list all of your serail ports
+  
+  port = new Serial(this, Serial.list()[4], 9600);//input the correct index of your serial port in the [] mine is 12
+  port.bufferUntil('\n');
+   minim = new Minim(this);
+  player = minim.loadFile("jack edited2.mp3");
+}
+
+void draw()
+{
+  
+  background(murder);
+  //=map(ardInput1,0,1023,0,width);
+  fill(0);
+   if (ardInput1>10) 
+   {
+          player.play();
+          
+        {image(jack,317,240);
+        
+      }
+        //else {
+        // player.close();
+         //minim.stop();
+         //}
+}
+}
+void serialEvent (Serial port)
+{
+      String inString = port.readStringUntil('\n');
+    
+      inString = trim(inString);
+    
+      int[] nums = int(split(inString, ','));
+    
+    
+      if(nums[0]==1) //the values are sent in pairs, the first value at index [0] is the route number
+      {
+       println("Sensor 1 says: "+nums[1]);  
+      ardInput1=nums[1]; //this is needed because the nums[] variable has a scope limited to this function, so it cannot be used in the draw function
+                         //ardInput1 is a global variable 
+      }
+      
+
+}
