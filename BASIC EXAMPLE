@@ -1,0 +1,57 @@
+
+// REACTIVE IMAGES
+PImage background;
+PImage mouseCursor;
+PImage hiddenLandscape;
+PImage cloud;
+PImage flower;
+PImage man;
+
+color colorUnderMouse;
+
+int houseNumber = #0610ec; // Hexcode of colour assigned to house (fill) via Photoshop
+int flowerNumber = #f10c2d; // Hexcode of colour assigned to flower (fill) via Photoshop
+int sunNumber = #f7ee0b; // Hexcode of colour assigned to sun (fill) via Photoshop
+
+color prev;
+
+void setup () {
+  size (775, 669);
+  smooth ();
+  ellipseMode(RADIUS);
+
+  mouseCursor = loadImage("bee cursor.png");
+  background = loadImage("housetreesunflowers.JPG");
+  hiddenLandscape = loadImage("housetreesunflowers COLOR BLOCK.jpg");
+  cloud = loadImage("Cloud.png");
+  man = loadImage("man.png");
+  flower = loadImage("flowers3.png");
+}
+
+void draw () {
+  background (background);
+  frameRate (30);
+  cursor (mouseCursor);
+
+  {
+    colorUnderMouse=color(hiddenLandscape.get(mouseX, mouseY)); //println(colorUnderMouse);
+
+    if ((colorUnderMouse==houseNumber)&&(colorUnderMouse!=prev))
+    {
+      println("you hit the house!!");
+      frameRate (1.0);
+      image(man, 300, 560);
+      
+    } else if ((colorUnderMouse==sunNumber)&&(colorUnderMouse!=prev))
+    {
+      println("you hit the sun!!");
+      frameRate (1.0);
+      image(cloud, 450, 50);
+    } else if ((colorUnderMouse==flowerNumber)&&(colorUnderMouse!=prev))
+    {
+      frameRate (1.0);
+      image(flower, 370, 540);
+    }
+    prev = colorUnderMouse;
+  }
+}
